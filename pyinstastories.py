@@ -333,14 +333,14 @@ def download_file(url, path, attempt=0):
 		urllib.urlretrieve(url, path)
 		urllib.urlcleanup()
 	except Exception as e:
-		if not attempt == 3:
+		if not attempt == 1:
 			attempt += 1
 			print("[E] ({:d}) Download failed: {:s}.".format(attempt, str(e)))
 			print("[W] Trying again in 5 seconds.")
 			time.sleep(5)
 			download_file(url, path, attempt)
 		else: 
-			print("[E] Retry failed three times, skipping file.")
+			print("[E] Skipping file.")
 			print('-' * 70)
 
 def command_exists(command):
@@ -447,7 +447,7 @@ def start():
 				time.sleep(5)
 			print('-' * 70)
 		except Exception as e:
-			if not attempt == 3:
+			if not attempt == 1:
 				attempt += 1
 				print("[E] ({:d}) Download failed: {:s}.".format(attempt, str(e)))
 				print("[W] Trying again in 5 seconds.")
@@ -455,7 +455,7 @@ def start():
 				print('-' * 70)
 				download_user(index, user, attempt)
 			else: 
-				print("[E] Retry failed three times, skipping user.")
+				print("[E] Skipping user.")
 				print('-' * 70)
 
 	for index, user_to_check in enumerate(users_to_check):
